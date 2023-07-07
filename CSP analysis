@@ -1,0 +1,34 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Read data from Excel file
+data_apo_NBD = pd.read_excel("path/to/your/CSP.xlsx", sheet_name="apo NBD")
+data_compound_A = pd.read_excel("path/to/your/CSP.xlsx", sheet_name="+compound A")
+
+# Calculate delta CS (1H)
+delta_cs_1H = data_compound_A["CS (1H)"].sub(data_apo_NBD["CS (1H)"]).mul(-1)
+
+# Calculate delta CS (15N)
+delta_cs_15N = data_compound_A["CS (15N) "].sub(data_apo_NBD["CS (15N) "]).mul(-1)
+
+# Calculate CSP using the given formula
+csp = np.sqrt(delta_cs_1H**2 + (0.157*delta_cs_15N)**2)
+
+# Plot CSPs as a function of residue numbers
+plt.figure(figsize=(15, 5))
+plt.plot(data_apo_NBD["Residue number"], csp, color="black")
+plt.axhline(y=0.2, color="red", linestyle="--")
+plt.xlabel("Residue number")
+plt.ylabel("CSP (ppm)")
+plt.title("Chemical shift perturbations plot")
+plt.legend(["CSP", "Threshold"], loc="upper right")
+# Find residue numbers with CSP > 0.2 ppm and annotate the plot
+residues_above_threshold = data_apo_NBD.loc[csp > 0.2, ["Residue number", "AA"]]
+for i, row in residues_above_threshold.iterrows():
+    plt.annotate(f"{row['Residue number']} {row['AA']}", xy=(row['Residue number'], csp[i]), xytext=(row['Residue number'], csp[i]+0.1), ha='center', fontsize=8, arrowprops=dict(facecolor='black', shrink=0.05))
+# Find residue numbers with CSP > 0.2 ppm
+residues_above_threshold = data_apo_NBD.loc[csp > 0.2, "Residue number"]
+print("Residue numbers with CSP > 0.2 ppm:")
+print(residues_above_threshold.tolist())
+plt.show()
