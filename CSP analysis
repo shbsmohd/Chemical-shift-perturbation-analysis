@@ -23,10 +23,12 @@ plt.xlabel("Residue number")
 plt.ylabel("CSP (ppm)")
 plt.title("Chemical shift perturbations plot")
 plt.legend(["CSP", "Threshold"], loc="upper right")
+
 # Find residue numbers with CSP > 0.2 ppm and annotate the plot
 residues_above_threshold = data_apo_NBD.loc[csp > 0.2, ["Residue number", "AA"]]
 for i, row in residues_above_threshold.iterrows():
     plt.annotate(f"{row['Residue number']} {row['AA']}", xy=(row['Residue number'], csp[i]), xytext=(row['Residue number'], csp[i]+0.1), ha='center', fontsize=8, arrowprops=dict(facecolor='black', shrink=0.05))
+
 # Find residue numbers with CSP > 0.2 ppm
 residues_above_threshold = data_apo_NBD.loc[csp > 0.2, "Residue number"]
 print("Residue numbers with CSP > 0.2 ppm:")
