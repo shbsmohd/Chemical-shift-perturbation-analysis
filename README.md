@@ -1,7 +1,7 @@
 ![download](https://github.com/shbsmohd/Chemical-shift-perturbation-analysis/assets/84704699/1b151d98-c796-4426-941d-621d78d38d26)
  ## Chemical Shift Perturbation Analysis of Hsp70 Nucleotide Binding Domain
 
-In this project, we performed a chemical shift perturbation analysis on the Nucleotide-Binding Domain (NBD) of Hsp70. The analysis aimed to investigate the interactions between the NBD and compound A, a putative inhibitor of chaperone ATPase activity.
+In this project, we performed a chemical shift perturbation analysis on the Nucleotide-Binding Domain (NBD) of Hsp70. The analysis aimed to investigate the interactions between the Nucleotide-Binding Domain and compound A, a putative inhibitor of chaperone ATPase activity.
 
 Using 1H and 15N chemical shift data recorded in the presence and absence of compound A, we calculated the total chemical shift perturbations (CSPs) for each NBD residue. The CSPs were calculated using the provided equation and considering the differences in proton and nitrogen chemical shifts.
 
